@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetry.WebService.Order", "OpenTelemetry.WebService.Order\OpenTelemetry.WebService.Order.csproj", "{A627252D-3612-4737-BFF1-B9AFEE6F626A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetry.WebService.Product", "OpenTelemetry.WebService.Product\OpenTelemetry.WebService.Product.csproj", "{6C841F8C-1693-457E-8A3B-B6C4F9CAF9D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetry.WebService.Order.Service", "OpenTelemetry.WebService.Order.Service\OpenTelemetry.WebService.Order.Service.csproj", "{1BFEA71A-4F20-4B44-A6B1-2E16364C491E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetry.WebService.Product.Service", "OpenTelemetry.WebService.Product.Service\OpenTelemetry.WebService.Product.Service.csproj", "{D252603D-55DB-452E-A9B1-CD7F9B84A140}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Order", "1.Order", "{89A945B6-EDC4-4C65-A655-B68CF76A24FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Product", "2.Product", "{9E9849F9-3866-462B-AF1E-5F1081B11C12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A627252D-3612-4737-BFF1-B9AFEE6F626A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A627252D-3612-4737-BFF1-B9AFEE6F626A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A627252D-3612-4737-BFF1-B9AFEE6F626A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A627252D-3612-4737-BFF1-B9AFEE6F626A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C841F8C-1693-457E-8A3B-B6C4F9CAF9D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C841F8C-1693-457E-8A3B-B6C4F9CAF9D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C841F8C-1693-457E-8A3B-B6C4F9CAF9D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C841F8C-1693-457E-8A3B-B6C4F9CAF9D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BFEA71A-4F20-4B44-A6B1-2E16364C491E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BFEA71A-4F20-4B44-A6B1-2E16364C491E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BFEA71A-4F20-4B44-A6B1-2E16364C491E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BFEA71A-4F20-4B44-A6B1-2E16364C491E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D252603D-55DB-452E-A9B1-CD7F9B84A140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D252603D-55DB-452E-A9B1-CD7F9B84A140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D252603D-55DB-452E-A9B1-CD7F9B84A140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D252603D-55DB-452E-A9B1-CD7F9B84A140}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A627252D-3612-4737-BFF1-B9AFEE6F626A} = {89A945B6-EDC4-4C65-A655-B68CF76A24FB}
+		{1BFEA71A-4F20-4B44-A6B1-2E16364C491E} = {89A945B6-EDC4-4C65-A655-B68CF76A24FB}
+		{6C841F8C-1693-457E-8A3B-B6C4F9CAF9D6} = {9E9849F9-3866-462B-AF1E-5F1081B11C12}
+		{D252603D-55DB-452E-A9B1-CD7F9B84A140} = {9E9849F9-3866-462B-AF1E-5F1081B11C12}
+	EndGlobalSection
+EndGlobal
