@@ -1,9 +1,16 @@
+using OpenTelemetry.WebService.Product.Service.Implements;
+using OpenTelemetry.WebService.Product.Service.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//[HttpClient]
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
@@ -34,6 +41,14 @@ app.MapGet("/weatherforecast", () =>
         return forecast;
     })
     .WithName("GetWeatherForecast")
+    .WithOpenApi();
+
+app.MapGet("/product", async (IProductService productService) =>
+    {
+        var products = await productService.GetAsync();
+        return products;
+    })
+    .WithName("GetProducts")
     .WithOpenApi();
 
 app.Run();

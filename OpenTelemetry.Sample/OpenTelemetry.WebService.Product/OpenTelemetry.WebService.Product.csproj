@@ -23,4 +23,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\OpenTelemetry.WebService.Product.Service\OpenTelemetry.WebService.Product.Service.csproj" />
+    </ItemGroup>
+
 </Project>
