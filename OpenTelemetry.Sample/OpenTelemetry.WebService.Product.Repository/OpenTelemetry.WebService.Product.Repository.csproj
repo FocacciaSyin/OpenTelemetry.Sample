@@ -7,11 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\OpenTelemetry.WebService.Product.Repository\OpenTelemetry.WebService.Product.Repository.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Mapster" Version="7.4.0" />
+      <PackageReference Include="Bogus" Version="35.5.0" />
     </ItemGroup>
 
 </Project>

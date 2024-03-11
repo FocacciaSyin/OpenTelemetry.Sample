@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+using Mapster;
 using OpenTelemetry.WebService.Order.Service.Implements;
 using OpenTelemetry.WebService.Order.Service.Interfaces;
 
@@ -7,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//[Mapster]
+builder.Services.AddMapster();
 
 //[HttpClient]
 builder.Services.AddHttpClient();

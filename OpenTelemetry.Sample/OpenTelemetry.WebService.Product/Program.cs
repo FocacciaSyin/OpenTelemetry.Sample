@@ -1,3 +1,10 @@
+using Mapster;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using OpenTelemetry.WebService.Product.Repository.Implements;
+using OpenTelemetry.WebService.Product.Repository.Interfaces;
 using OpenTelemetry.WebService.Product.Service.Implements;
 using OpenTelemetry.WebService.Product.Service.Interfaces;
 
@@ -8,9 +15,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+string serviceName = "OpenTelemetry.WebService.Product";
+builder.Services.AddOpenTelemetry()
+    .WithTracing(providerBuilder =>
+    {
+        providerBuilder
+            .AddAspNetCoreInstrumentation()
+            .AddSqlClientInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddConsoleExporter()
+            .AddSource(serviceName)
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName, serviceVersion: "1.0.0"));
+    });
+
+
+//[Mapster]
+builder.Services.AddMapster();
+
 //[HttpClient]
 builder.Services.AddHttpClient();
+
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
