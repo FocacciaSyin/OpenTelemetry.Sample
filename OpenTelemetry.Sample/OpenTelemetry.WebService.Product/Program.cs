@@ -23,9 +23,9 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddSqlClientInstrumentation()
             .AddHttpClientInstrumentation()
-            .AddConsoleExporter()
-            .AddSource(serviceName)
-            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName, serviceVersion: "1.0.0"));
+            .SetResourceBuilder(ResourceBuilder.CreateDefault()
+                .AddService(serviceName, serviceVersion: "1.0.0"))
+            .AddZipkinExporter();
     });
 
 
