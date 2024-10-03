@@ -70,7 +70,7 @@ pass.123
 
 用於 Tracing API 
 
-![image-20241003173939576](Images\Grafana_1.png)
+![image-20241003173939576](Images/Grafana_1.png)
 
 #### Dashboard
 
@@ -186,4 +186,4 @@ app.MapPrometheusScrapingEndpoint();
 
 確認 Docker 執行後的 port 是對應到 `prometheus.yaml` 設定的 `targets: ['host.docker.internal:5131']` 
 
-![image-20241003175009319](Images\webAPI_1.png)
+![image-20241003175009319](Images/webAPI_1.png)
