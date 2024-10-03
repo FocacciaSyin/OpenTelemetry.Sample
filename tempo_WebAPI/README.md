@@ -58,7 +58,7 @@ admin
 pass.123
 ```
 
-![image-20241003174630409](Images\docker_2.png)
+![image-20241003174630409](Images/docker_2.png)
 
 ---
 
