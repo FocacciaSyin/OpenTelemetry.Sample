@@ -9,6 +9,14 @@
 
 [Example: Use OpenTelemetry with Prometheus, Grafana, and Jaeger](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/observability-prgrja-example)
 
+
+
+代辦清單
+
+- [ ] 加入Loki
+  - [ ] [使用 Grafana 和 Loki 進行 .NET Core 微服務日誌記錄 |通過 Arkaprava Sinha | .Net 程式設計 |中等的 --- .NET Core Microservice Logging with Grafana and Loki | by Arkaprava Sinha | .Net Programming | Medium](https://medium.com/c-sharp-programming/net-core-microservice-logging-with-grafana-and-loki-92cd2783ed88)
+  - [ ] [手把手教你 Grafana Loki︰從入門到精通. 現在時間下午五點十二分，總算把 Grafana Loki… | by Ivan Cheng | Medium](https://medium.com/@jieshiun/手把手教你-grafana-loki-從入門到精通-feab84c209f0)
+
 ## 開始實作
 
 > 目標：建立一個 ASP.NET WEBAPI 產出 OpenTelemetry
