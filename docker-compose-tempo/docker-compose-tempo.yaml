@@ -9,9 +9,23 @@ services:
       - ./tempo-data:/tmp/tempo
     ports:
       - "3200:3200"   # tempo
-      - "9095:9095" # tempo grpc
-      - "4317:4317"  # otlp grpc
-      - "4318:4318"  # otlp http
+      - "9095:9095"   # tempo grpc
+      - "4317:4317"   # otlp grpc
+      - "4318:4318"   # otlp http
+
+  loki:
+    container_name: loki
+    image: grafana/loki:master
+    ports:
+       - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+    healthcheck:
+        test: wget -q --tries=1 -O- http://localhost:3100/ready 
+        interval: 3s
+        timeout: 3s
+        retries: 10
+        start_period: 10s
+
   prometheus:
     image: prom/prometheus:latest
     command:
@@ -22,6 +36,7 @@ services:
       - ./prometheus.yaml:/etc/prometheus.yaml
     ports:
       - "9090:9090" 
+  
   grafana:
     image: grafana/grafana:latest
     volumes:
@@ -35,3 +50,6 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/admin_password # 如果不想用 admin 密碼，這行刪除
     ports:
       - "3000:3000"
+    depends_on:
+      loki:
+        condition: service_healthy
