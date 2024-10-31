@@ -4,7 +4,7 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace WebApplication1.DI;
+namespace WebApplication2.DI;
 
 public static class DependencyInjectionExtensions
 {
@@ -36,17 +36,18 @@ public static class DependencyInjectionExtensions
         otel.WithTracing(tracing =>
         {
             tracing.AddAspNetCoreInstrumentation(options =>
-            {
-                options.Filter = (httpContext) =>
                 {
-                    //排除一些不需要觀察的路徑
-                    return !(httpContext.Request.Path == "/health" ||
-                             httpContext.Request.Path == "/" ||
-                             httpContext.Request.Path == "/metrics");
-                };
-            });
-            tracing.AddHttpClientInstrumentation(options => { });
-            tracing.AddSource(activitySource.Name);
+                    options.Filter = (httpContext) =>
+                    {
+                        //排除一些不需要觀察的路徑
+                        return !(httpContext.Request.Path == "/health" ||
+                                 httpContext.Request.Path == "/" ||
+                                 httpContext.Request.Path == "/metrics");
+                    };
+                })
+                .AddEntityFrameworkCoreInstrumentation(options => { options.SetDbStatementForText = true; })
+                .AddHttpClientInstrumentation(options => { })
+                .AddSource(activitySource.Name);
 
             if (endPointURL != null)
             {

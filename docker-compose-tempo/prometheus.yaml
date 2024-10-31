@@ -13,3 +13,10 @@ scrape_configs:
   - job_name: 'tempo-webapi'
     static_configs:
       - targets: ['host.docker.internal:5131']
+  #想要觀測的話再把專案用Docker跑起來
+  - job_name: 'WebApplication-1'
+    static_configs:
+      - targets: ['host.docker.internal:5132']
+  - job_name: 'WebApplication-2'
+    static_configs:
+      - targets: ['host.docker.internal:5133']

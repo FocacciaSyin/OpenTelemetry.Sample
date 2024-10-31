@@ -1,15 +1,23 @@
 ﻿using System.Net;
 using LanguageExt.Common;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.Options;
 
-namespace WebApplication1.Repository;
+namespace WebApplication1.Infrastructure.Helper;
 
-public static class ApiHelper
+public class ApiHelper
 {
-    //Get
-    public static async Task<Result<T>> GetAsync<T>(string requestUri, CancellationToken ct)
+    private readonly IHttpClientFactory _clientFactory;
+
+    public ApiHelper(IHttpClientFactory clientFactory)
     {
-        HttpClient client = new HttpClient();
-        client.BaseAddress = new Uri("http://localhost:5001");
+        _clientFactory = clientFactory;
+    }
+
+    //Get
+    public async Task<Result<T>> GetAsync<T>(string requestUri, CancellationToken ct)
+    {
+        var client = _clientFactory.CreateClient("Default");
         var response = await client.GetAsync(requestUri, ct);
         var responseMessage = response.EnsureSuccessStatusCode();
 

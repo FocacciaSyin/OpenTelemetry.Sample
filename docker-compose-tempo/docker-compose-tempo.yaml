@@ -39,6 +39,9 @@ services:
     image: grafana/grafana:latest
     volumes:
       - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      # Dashboard 還是手動匯入
+      #- ./grafana/dashboards:/etc/dashboards
+      #- ./grafana/grafana-dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
       - ./admin_password:/run/secrets/admin_password # 如果不想用 admin 密碼，這行刪除
     environment:
       # - GF_AUTH_ANONYMOUS_ENABLED=true # 如果不想用 admin 密碼，這邊取消註解

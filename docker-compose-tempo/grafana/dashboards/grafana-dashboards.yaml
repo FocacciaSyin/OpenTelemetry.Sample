@@ -1,0 +1,15 @@
+#先保留範例,目前測試還是要手動指定 Prometheus
+apiVersion: 1
+
+providers:
+  - name: 'dotnet OpenTelemetry'
+    orgId: 1
+    folder: ''
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/dashboards
+      foldersFromFilesStructure: false

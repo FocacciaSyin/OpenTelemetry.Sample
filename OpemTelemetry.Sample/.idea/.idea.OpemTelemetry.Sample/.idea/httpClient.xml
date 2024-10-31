@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="HttpClientEndpointsTabState">
-    <option name="requestToText" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;1d3b48138cb40738d96fe52cabb5626c36ff96f6&quot; value=&quot;###&amp;#10;GET http://localhost:5001/User/Product/{{userId}}&quot; /&gt;&#10;  &lt;entry key=&quot;0c8188e58d5f0e4fede42ce440ccb4bd65a6b82c&quot; value=&quot;###&amp;#10;GET http://localhost:5001/WeatherForecast&quot; /&gt;&#10;  &lt;entry key=&quot;7699e0cfdd604eea08cabd9b3e53a6ae127281cd&quot; value=&quot;###&amp;#10;GET http://localhost:5001/User&quot; /&gt;&#10;  &lt;entry key=&quot;970d9e6e826666dbbd69b624e5357cd0098040a4&quot; value=&quot;###&amp;#10;GET http://localhost:5001/User/{{userId}},&quot; /&gt;&#10;  &lt;entry key=&quot;c6cc51840e7a28960147adc28ad8805a73368f38&quot; value=&quot;###&amp;#10;GET http://localhost:5001/User/{{userId}}&quot; /&gt;&#10;  &lt;entry key=&quot;6fe24be72669741ea39fdcf3b8ce2603e0a8583c&quot; value=&quot;###&amp;#10;GET http://localhost:5001/User/i&quot; /&gt;&#10;  &lt;entry key=&quot;4748d64f72d228f25919c7b9907cccc88f4eac6d&quot; value=&quot;###&amp;#10;GET http://localhost:5001/User/{{userID}}&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
+    <option name="requestToText" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;c6cc51840e7a28960147adc28ad8805a73368f38&quot; value=&quot;###&amp;#10;GET http://localhost:5001/User/{{userId}}&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
   </component>
 </project>

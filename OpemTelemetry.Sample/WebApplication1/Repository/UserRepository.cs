@@ -1,10 +1,18 @@
 ﻿using Common;
 using LanguageExt.Common;
+using WebApplication1.Infrastructure.Helper;
 
 namespace WebApplication1.Repository;
 
 public class UserRepository
 {
+    private readonly ApiHelper _apiHelper;
+
+    public UserRepository(ApiHelper apiHelper)
+    {
+        _apiHelper = apiHelper;
+    }
+
     //Get
     public async Task<Result<User>> GetAsync(int userId, CancellationToken ct)
     {
@@ -13,7 +21,7 @@ public class UserRepository
             return new Result<User>(new InvalidDataException("UserId 不符合規範"));
         }
 
-        var result = await ApiHelper.GetAsync<User>($"/user/{userId}", ct);
+        var result = await _apiHelper.GetAsync<User>($"/user/{userId}", ct);
         return result;
     }
 }

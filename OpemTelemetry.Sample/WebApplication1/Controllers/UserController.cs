@@ -1,5 +1,6 @@
 ﻿using Common;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Infrastructure.Helper;
 using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers;
@@ -10,11 +11,13 @@ public class UserController : ControllerBase
 {
     private readonly ILogger<UserController> _logger;
     private readonly UserRepository _userRepository;
+    private readonly ApiHelper _apiHelper;
 
-    public UserController(ILogger<UserController> logger, UserRepository userRepository)
+    public UserController(ILogger<UserController> logger, UserRepository userRepository, ApiHelper apiHelper)
     {
         _logger = logger;
         _userRepository = userRepository;
+        _apiHelper = apiHelper;
     }
 
     [HttpGet("{userId}", Name = "GetUserById")]
@@ -45,7 +48,7 @@ public class UserController : ControllerBase
     [HttpGet("Product/{userId}", Name = "GetUserProductByUserId")]
     public async Task<IActionResult> GetUserProduct(int userId, CancellationToken ct)
     {
-        var result = await ApiHelper.GetAsync<UserProductDataModel>($"user/product/{userId}", ct);
+        var result = await _apiHelper.GetAsync<UserProductDataModel>($"user/product/{userId}", ct);
 
         return result.Match<IActionResult>(
             s => Ok(s),
