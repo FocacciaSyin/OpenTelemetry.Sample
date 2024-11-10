@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.Metrics;
+using System.Reflection;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -12,13 +13,16 @@ public static class DependencyInjectionExtensions
         this IServiceCollection services,
         WebApplicationBuilder builder)
     {
+        // 反射取得服務相關的類別庫名稱
+        var assembly_serviceName = Assembly.GetEntryAssembly()?.GetName().Name;
+        var assembly_serviceVersion = Assembly.GetEntryAssembly()?.GetName().Version?.ToString();
+
         //[基本設定]
-        var serviceName = builder.Configuration["OTEL_SERVICE_NAME"];
-        var meterName = new Meter(serviceName, "1.0.0");
+        var meterName = new Meter(assembly_serviceName, assembly_serviceVersion);
 
         var otel = builder.Services.AddOpenTelemetry();
 
-        otel.ConfigureResource(resource => resource.AddService(serviceName: serviceName));
+        otel.ConfigureResource(resource => resource.AddService(serviceName: assembly_serviceName));
 
         //[Metrics]
         otel.WithMetrics(metrics => metrics
@@ -31,24 +35,29 @@ public static class DependencyInjectionExtensions
             .AddPrometheusExporter()); // 匯出 metrics 到 Prometheus
 
         //[Tracing]
-        var endPointURL = builder.Configuration["OTLP_ENDPOINT_URL"];
-        var activitySource = new ActivitySource(serviceName);
         otel.WithTracing(tracing =>
         {
-            tracing.AddAspNetCoreInstrumentation(options =>
-                {
-                    options.Filter = (httpContext) =>
-                    {
-                        //排除一些不需要觀察的路徑
-                        return !(httpContext.Request.Path == "/health" ||
-                                 httpContext.Request.Path == "/" ||
-                                 httpContext.Request.Path == "/metrics");
-                    };
-                })
-                .AddEntityFrameworkCoreInstrumentation(options => { options.SetDbStatementForText = true; })
-                .AddHttpClientInstrumentation(options => { })
-                .AddSource(activitySource.Name);
+            tracing.SetResourceBuilder(
+                ResourceBuilder
+                    .CreateDefault()
+                    .AddService(assembly_serviceName, serviceVersion: assembly_serviceVersion));
 
+            tracing.AddAspNetCoreInstrumentation(options =>
+            {
+                options.Filter = (httpContext) =>
+                {
+                    //排除一些不需要觀察的路徑
+                    return !(httpContext.Request.Path == "/health" ||
+                             httpContext.Request.Path == "/" ||
+                             httpContext.Request.Path == "/metrics");
+                };
+            });
+            
+            tracing.AddEntityFrameworkCoreInstrumentation(options => { options.SetDbStatementForText = true; });
+            tracing.AddHttpClientInstrumentation(options => { });
+            tracing.AddSource(assembly_serviceName);
+
+            var endPointURL = builder.Configuration["OTLP_ENDPOINT_URL"];
             if (endPointURL != null)
             {
                 //匯出 Tracing 資料到 Tempo

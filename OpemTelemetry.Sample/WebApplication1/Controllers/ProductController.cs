@@ -1,9 +1,11 @@
 ﻿using Common;
+using Common.AOP;
 using LanguageExt.ClassInstances;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication1.Controllers;
 
+[Tracing]
 [ApiController]
 [Route("[controller]")]
 public class ProductController : ControllerBase

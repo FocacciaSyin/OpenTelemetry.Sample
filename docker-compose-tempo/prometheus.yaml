@@ -1,12 +1,13 @@
 global:
   scrape_interval:     15s
   evaluation_interval: 15s
-
+  
+# 想要觀測的服務都寫在這裡
 scrape_configs:
-  - job_name: 'prometheus'
+  - job_name: 'prometheus' # 自我監控任務
     static_configs:
-      - targets: [ 'localhost:9090' ]
-  - job_name: 'tempo'
+      - targets: [ 'localhost:9090' ] # 抓取自身 Prometheus 的資料
+  - job_name: 'tempo' #  確認 tempo 是否有正常運作
     static_configs:
       - targets: [ 'tempo:3200' ]
   #增加了一組，未來只要增加一個新的專案要觀察都要補上一個 job_name

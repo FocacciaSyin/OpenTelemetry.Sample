@@ -1,9 +1,11 @@
 ﻿using Common;
+using Common.AOP;
 using WebApplication2.Repository.Product;
 using WebApplication2.Repository.User;
 
 namespace WebApplication2.Service.User;
 
+[Tracing]
 public class UserService(UserRepository userRepository, ProductRepository productRepository)
 {
     //Get

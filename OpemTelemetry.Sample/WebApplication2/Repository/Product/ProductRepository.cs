@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.AOP;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Repository.Product;
 
+[Tracing]
 public class ProductRepository
 {
     private readonly DataContext _dataContext;

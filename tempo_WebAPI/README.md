@@ -192,6 +192,9 @@ app.MapPrometheusScrapingEndpoint();
 
 #### 執行 Docker
 
-確認 Docker 執行後的 port 是對應到 `prometheus.yaml` 設定的 `targets: ['host.docker.internal:5131']` 
+1. 確認 Docker 執行後的 port 是對應到 `prometheus.yaml` 設定的 `targets: ['host.docker.internal:5131']` 
+2. 為了讓內部
+
+
 
 ![image-20241003175009319](Images/webAPI_1.png)

@@ -30,6 +30,7 @@ services:
       - --config.file=/etc/prometheus.yaml
       - --web.enable-remote-write-receiver
       - --enable-feature=exemplar-storage
+      - --storage.tsdb.retention.time=14d
     volumes:
       - ./prometheus.yaml:/etc/prometheus.yaml
     ports:

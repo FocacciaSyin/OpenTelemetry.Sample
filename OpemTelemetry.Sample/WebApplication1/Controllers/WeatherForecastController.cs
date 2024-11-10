@@ -1,7 +1,9 @@
+using Common.AOP;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication1.Controllers;
 
+[Tracing]
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase

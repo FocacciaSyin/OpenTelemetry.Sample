@@ -1,10 +1,12 @@
 ﻿using Common;
+using Common.AOP;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Infrastructure.Helper;
 using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers;
 
+[Tracing]
 [ApiController]
 [Route("[controller]")]
 public class UserController : ControllerBase

@@ -1,5 +1,8 @@
-﻿namespace WebApplication2.Repository.User;
+﻿using Common.AOP;
 
+namespace WebApplication2.Repository.User;
+
+[Tracing]
 public class UserRepository
 {
     private readonly DataContext _dataContext;

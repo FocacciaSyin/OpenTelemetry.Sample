@@ -1,9 +1,11 @@
 ﻿using Common;
+using Common.AOP;
 using LanguageExt.Common;
 using WebApplication1.Infrastructure.Helper;
 
 namespace WebApplication1.Repository;
 
+[Tracing]
 public class UserRepository
 {
     private readonly ApiHelper _apiHelper;
