@@ -20,7 +20,9 @@ distributor:
     otlp:
       protocols:
         http:
+          endpoint: "tempo:4318"       # v2.7 breakChange  https://grafana.com/docs/tempo/latest/release-notes/v2-7/#opentelemetry-collector-receiver-listens-on-localhost-by-default
         grpc:
+          endpoint: "tempo:4317"
     opencensus:
 
 ingester:

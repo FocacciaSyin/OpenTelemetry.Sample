@@ -1,3 +1,6 @@
+networks:
+  monitoring:
+
 services:
   tempo:
     image: grafana/tempo:latest
@@ -10,10 +13,12 @@ services:
       - "9095:9095" # tempo grpc
       - "4317:4317" # otlp grpc
       - "4318:4318" # otlp http
+    networks:
+      - monitoring
 
   loki:
     container_name: loki
-    image: grafana/loki:master
+    image: grafana/loki:latest
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
@@ -23,6 +28,18 @@ services:
       timeout: 3s
       retries: 10
       start_period: 10s
+    networks:
+      - monitoring
+
+  #使用 promtail 蒐集Log 拋到 Loki
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - ./promtail-config.yml:/etc/promtail/config.yml # 手動調整 promtail-config.yml
+      - /var/log:/var/log
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - monitoring
 
   prometheus:
     image: prom/prometheus:latest
@@ -35,6 +52,8 @@ services:
       - ./prometheus.yaml:/etc/prometheus.yaml
     ports:
       - "9090:9090"
+    networks:
+      - monitoring
 
   grafana:
     image: grafana/grafana:latest
@@ -52,3 +71,5 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/admin_password # 如果不想用 admin 密碼，這行刪除
     ports:
       - "3000:3000"
+    networks:
+      - monitoring
