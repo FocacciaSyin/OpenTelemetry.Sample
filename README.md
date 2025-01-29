@@ -66,9 +66,5 @@ if (OtlpEndpoint != null)
 
 ```
 
-
-
-
-
 備註：net8 可以直接使用 aspire.ServiceDefault
 

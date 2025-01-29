@@ -25,6 +25,7 @@ public class UserController : ControllerBase
     [HttpGet("{userId}", Name = "GetUserById")]
     public async Task<IActionResult> Get(int userId, CancellationToken ct)
     {
+        // throw new Exception($"{userId} 有問題");
         //這種Result寫法是 參考：https://www.youtube.com/watch?v=aksjZkCbIWA
         var result = await _userRepository.GetAsync(userId, ct);
 

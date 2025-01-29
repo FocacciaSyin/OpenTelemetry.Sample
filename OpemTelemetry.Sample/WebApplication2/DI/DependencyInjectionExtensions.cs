@@ -21,7 +21,6 @@ public static class DependencyInjectionExtensions
         var meterName = new Meter(assembly_serviceName, assembly_serviceVersion);
 
         var otel = builder.Services.AddOpenTelemetry();
-
         otel.ConfigureResource(resource => resource.AddService(serviceName: assembly_serviceName));
 
         //[Metrics]

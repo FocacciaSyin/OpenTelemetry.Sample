@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.Metrics;
+﻿using System.Diagnostics.Metrics;
 using System.Reflection;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Serilog;
+using Serilog.Debugging;
 
 namespace WebApplication1.DI;
 
@@ -13,6 +14,12 @@ public static class DependencyInjectionExtensions
         this IServiceCollection services,
         WebApplicationBuilder builder)
     {
+        // Logging
+        SelfLog.Enable(Console.Error);
+        builder.Logging.ClearProviders();
+        builder.Host.UseSerilog((ctx, cfg) =>
+            cfg.ReadFrom.Configuration(ctx.Configuration));
+
         // 反射取得服務相關的類別庫名稱
         var assembly_serviceName = Assembly.GetEntryAssembly()?.GetName().Name;
         var assembly_serviceVersion = Assembly.GetEntryAssembly()?.GetName().Version?.ToString();
@@ -51,7 +58,7 @@ public static class DependencyInjectionExtensions
                     //排除一些不需要觀察的路徑
                     return !(httpContext.Request.Path == "/health" ||
                              httpContext.Request.Path == "/" ||
-                             httpContext.Request.Path == "/metrics");
+                             httpContext.Request.Path == "/metrics"); //排除 localhost:3100
                 };
             });
             tracing.AddHttpClientInstrumentation(options => { });
