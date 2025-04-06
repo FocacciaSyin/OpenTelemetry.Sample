@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.AOP;
+using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Infrastructure.Helper;
 using WebApplication1.Repository;
@@ -26,7 +27,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Get(int userId, CancellationToken ct)
     {
         // throw new Exception($"{userId} 有問題");
-        //這種Result寫法是 參考：https://www.youtube.com/watch?v=aksjZkCbIWA
+        //這種 Result 寫法是 參考：https://www.youtube.com/watch?v=aksjZkCbIWA
         var result = await _userRepository.GetAsync(userId, ct);
 
         return result.Match<IActionResult>(
@@ -38,7 +39,6 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Create([FromBody] User user, CancellationToken ct)
     {
         HttpClient client = new HttpClient();
-        client.BaseAddress = new Uri("http://localhost:5001");
         var response = await client.PostAsJsonAsync("/user", user, ct);
         if (response.IsSuccessStatusCode is false)
         {

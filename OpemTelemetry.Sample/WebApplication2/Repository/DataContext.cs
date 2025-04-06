@@ -8,6 +8,6 @@ public class DataContext : DbContext
     {
     }
 
-    public DbSet<Common.User> Users => Set<Common.User>();
-    public DbSet<Common.Product> Products => Set<Common.Product>();
+    public DbSet<Common.Models.User> Users => Set<Common.Models.User>();
+    public DbSet<Common.Models.Product> Products => Set<Common.Models.Product>();
 }

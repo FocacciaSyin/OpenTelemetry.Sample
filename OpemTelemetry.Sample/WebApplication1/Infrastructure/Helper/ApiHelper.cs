@@ -14,7 +14,6 @@ public class ApiHelper
         _clientFactory = clientFactory;
     }
 
-    //Get
     public async Task<Result<T>> GetAsync<T>(string requestUri, CancellationToken ct)
     {
         var client = _clientFactory.CreateClient("Default");

@@ -8,6 +8,22 @@
 
 # 首次使用
 
+注意 Docker 訪問內部其他 Container 是使用
+http://host.docker.internal:5132
+
+
+Podman 實作後失敗 先改使用 docker
+Podman 是使用
+http://host.containers.internal:5132
+```
+cd 到 sln 路徑
+
+podman build -f .\WebApplication1\Dockerfile -t webapplication1:latest .
+podman build -f .\WebApplication2\Dockerfile -t webapplication2:latest .
+
+podman run -d --name webapplication1 --env ASPNETCORE_ENVIRONMENT=Release -p 5132:8080 webapplication1:latest 
+podman run -d --name webapplication2 --env ASPNETCORE_ENVIRONMENT=Release -p 5133:8080 webapplication2:latest 
+```
 
 # Grafana
 

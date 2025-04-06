@@ -3,7 +3,4 @@
 namespace Common.AOP;
 
 [Injection(typeof(TracingAspect))]
-public class TracingAttribute : Attribute
-{
-    
-}
+public class TracingAttribute : Attribute;

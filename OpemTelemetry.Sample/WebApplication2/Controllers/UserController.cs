@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.AOP;
+using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Service.User;
 

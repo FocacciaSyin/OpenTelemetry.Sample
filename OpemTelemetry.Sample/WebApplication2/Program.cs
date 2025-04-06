@@ -1,6 +1,5 @@
-using Common;
+using Common.Observability;
 using Microsoft.EntityFrameworkCore;
-using WebApplication2.DI;
 using WebApplication2.Repository;
 using WebApplication2.Repository.Product;
 using WebApplication2.Repository.User;
@@ -15,8 +14,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 //[OpenTelemetry-基本設定]
-builder.Services.AddOpenTelemetrySettings(builder);
+// builder.Services.AddOpenTelemetrySettings(builder);
+builder.Services.AddTracing(builder)
+    .AddMetrics(builder);
+    // .AddLogging(builder);
+
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<ProductService>();
@@ -30,12 +34,8 @@ var app = builder.Build();
 
 app.MapPrometheusScrapingEndpoint();
 
-// Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
 app.UseSwagger();
 app.UseSwaggerUI();
-// }
 
 app.UseHttpsRedirection();
 

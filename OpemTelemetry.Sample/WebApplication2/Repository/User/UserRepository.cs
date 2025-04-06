@@ -12,13 +12,13 @@ public class UserRepository
         _dataContext = dataContext;
     }
 
-    public async Task<Common.User?> GetAsync(int id, CancellationToken ct)
+    public async Task<Common.Models.User?> GetAsync(int id, CancellationToken ct)
     {
         var result = await _dataContext.Users.FindAsync(id, ct);
         return result;
     }
 
-    public async Task<int> CreateAsync(Common.User user, CancellationToken ct)
+    public async Task<int> CreateAsync(Common.Models.User user, CancellationToken ct)
     {
         await _dataContext.Users.AddAsync(user, ct);
         var result = await _dataContext.SaveChangesAsync(ct);
