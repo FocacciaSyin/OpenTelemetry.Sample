@@ -24,6 +24,7 @@ public class ProductController : ControllerBase
     [HttpPost(Name = "CreateProduct")]
     public async Task<IActionResult> Create([FromBody] Product product, CancellationToken ct)
     {
+        return BadRequest("拋出BadRequest");
         var httpClient = _httpClientFactory.CreateClient("Default");
         var response = await httpClient.PostAsJsonAsync("/product", product, ct);
         if (response.IsSuccessStatusCode is false)
@@ -37,6 +38,8 @@ public class ProductController : ControllerBase
     [HttpGet(Name = "GetProducts")]
     public async Task<IActionResult> GetAll(CancellationToken ct)
     {
+        _logger.LogTrace("[Woody] Debug");
+        throw new NullReferenceException("我自訂義的");
         var httpClient = _httpClientFactory.CreateClient("Default");
         var response = await httpClient.GetAsync("/product", ct);
         if (response.IsSuccessStatusCode is false)

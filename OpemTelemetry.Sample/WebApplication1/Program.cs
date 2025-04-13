@@ -1,6 +1,8 @@
 using Common.Observability;
 using Common.Settings;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Options;
+using Serilog;
 using WebApplication1.Infrastructure.Helper;
 using WebApplication1.Repository;
 
@@ -28,11 +30,15 @@ builder.Services.AddHttpClient("Default", (serviceProvider, client) =>
 
 var app = builder.Build();
 
-var logger = app.Services.GetRequiredService<ILogger<Program>>();
-var apiSettings = app.Services.GetRequiredService<IOptions<ApiSettings>>().Value;
-logger.LogInformation("[Woody] Log {BaseUrl}", apiSettings.BaseUrl);
-
 app.MapPrometheusScrapingEndpoint();
+app.UseSerilogRequestLogging(options =>
+{
+    options.MessageTemplate = "HTTP [{StatusCode}] {RequestMethod} {RequestPath} {QueryString} in {Elapsed:0.0000} ms";
+    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+    {
+        diagnosticContext.Set("QueryString", httpContext.Request.QueryString.Value);
+    };
+});
 
 app.UseSwagger();
 app.UseSwaggerUI();

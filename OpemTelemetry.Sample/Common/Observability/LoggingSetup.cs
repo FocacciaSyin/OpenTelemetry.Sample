@@ -10,10 +10,11 @@ public static class LoggingSetup
 {
     public static IServiceCollection AddLogging(this IServiceCollection services, WebApplicationBuilder builder)
     {
-        SelfLog.Enable(Console.Error);
-        builder.Logging.ClearProviders();
-        builder.Host.UseSerilog((ctx, cfg) =>
-            cfg.ReadFrom.Configuration(ctx.Configuration));
+        builder.Services.AddSerilog((services, lc) => lc
+            .ReadFrom.Configuration(builder.Configuration)
+            .ReadFrom.Services(services)
+            .Enrich.FromLogContext()
+            .WriteTo.Console());
         
         return services;
     }

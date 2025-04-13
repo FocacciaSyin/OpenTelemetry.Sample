@@ -1,5 +1,6 @@
 using Common.Observability;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using WebApplication2.Repository;
 using WebApplication2.Repository.Product;
 using WebApplication2.Repository.User;
