@@ -39,7 +39,6 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> GetAll(CancellationToken ct)
     {
         _logger.LogTrace("[Woody] Debug");
-        throw new NullReferenceException("我自訂義的");
         var httpClient = _httpClientFactory.CreateClient("Default");
         var response = await httpClient.GetAsync("/product", ct);
         if (response.IsSuccessStatusCode is false)

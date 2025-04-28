@@ -5,14 +5,17 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <Configurations>Release;Development</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Development' ">
+      <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
+      <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
-        <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
         <PackageReference Include="Serilog.Sinks.Grafana.Loki" Version="8.3.0" />
@@ -25,10 +28,15 @@
       </Content>
       <Content Update="appsettings.Development.json">
         <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Update="appsettings.Release.json">
-        <TransformOnBuild>false</TransformOnBuild>
+        <TransformOnBuild>true</TransformOnBuild>
         <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
 

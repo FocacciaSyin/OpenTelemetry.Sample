@@ -82,24 +82,19 @@ services:
   #   depends_on:
   #     - tempo
 
-#  webapp1:
-#    build:
-#      context: ../OpemTelemetry.Sample
-#      dockerfile: WebApplication1/Dockerfile
-#      args:
-#        BUILD_CONFIGURATION: Release
-#    ports:
-#      - "5132:8080"
-#    networks:
-#      - monitoring
-#
-#  webapp2:
-#    build:
-#      context: ../OpemTelemetry.Sample
-#      dockerfile: WebApplication2/Dockerfile
-#      args:
-#        BUILD_CONFIGURATION: Release
-#    ports:
-#      - "5133:8080"
-#    networks:
-#      - monitoring
+  webapp1:
+    image: webapplication1-release:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+    ports:
+      - "5132:8080"
+    networks:
+      - monitoring
+  webapp2:
+    image: webapplication2-release:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+    ports:
+      - "5133:8080"
+    networks:
+      - monitoring

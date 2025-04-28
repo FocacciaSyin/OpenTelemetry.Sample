@@ -5,15 +5,22 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <Configurations>Release;Development</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Development' ">
+      <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
+      <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,10 +34,15 @@
         </Content>
         <Content Update="appsettings.Development.json">
             <DependentUpon>appsettings.json</DependentUpon>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <Content Update="appsettings.Release.json">
-            <TransformOnBuild>false</TransformOnBuild>
+            <TransformOnBuild>true</TransformOnBuild>
             <DependentUpon>appsettings.json</DependentUpon>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Update="appsettings.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
 
