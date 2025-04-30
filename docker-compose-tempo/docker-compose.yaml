@@ -52,6 +52,7 @@ services:
       # Dashboard 還是手動匯入
       #- ./grafana/dashboards:/etc/dashboards
       #- ./grafana/grafana-dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
+      - ./grafana-data:/var/lib/grafana # 將 Grafana 資料保留在 Volume
       - ./admin_password:/run/secrets/admin_password # 如果不想用 admin 密碼，這行刪除
     environment:
       # - GF_AUTH_ANONYMOUS_ENABLED=true # 如果不想用 admin 密碼，這邊取消註解
