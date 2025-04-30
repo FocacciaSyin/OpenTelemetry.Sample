@@ -15,6 +15,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Remove="appsettings.Development.json" />
+      <Content Remove="appsettings.Release.json" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
             <PrivateAssets>all</PrivateAssets>
@@ -32,22 +37,25 @@
         <Content Include="..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
-        <Content Update="appsettings.Development.json">
-            <DependentUpon>appsettings.json</DependentUpon>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Update="appsettings.Release.json">
-            <TransformOnBuild>true</TransformOnBuild>
-            <DependentUpon>appsettings.json</DependentUpon>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+        <None Include="appsettings.Development.json">
+          <DependentUpon>appsettings.json</DependentUpon>
+          <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+          <IsTransformFile>true</IsTransformFile>
+        </None>
+        <None Include="appsettings.Release.json">
+          <TransformOnBuild>true</TransformOnBuild>
+          <DependentUpon>appsettings.json</DependentUpon>
+          <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+          <IsTransformFile>true</IsTransformFile>
+        </None>
         <Content Update="appsettings.json">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          <TransformOnBuild>true</TransformOnBuild>
         </Content>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Common\Common.csproj"/>
+        <ProjectReference Include="..\Common\Common.csproj" />
     </ItemGroup>
 
     <ItemGroup>

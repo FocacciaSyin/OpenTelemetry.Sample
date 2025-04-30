@@ -15,7 +15,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Remove="appsettings.Development.json" />
+      <Content Remove="appsettings.Release.json" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
+        <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
         <PackageReference Include="Serilog.Sinks.Grafana.Loki" Version="8.3.0" />
@@ -26,17 +35,20 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
-      <Content Update="appsettings.Development.json">
+      <None Include="appsettings.Development.json">
         <DependentUpon>appsettings.json</DependentUpon>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="appsettings.Release.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+        <IsTransformFile>true</IsTransformFile>
+      </None>
+      <None Include="appsettings.Release.json">
         <TransformOnBuild>true</TransformOnBuild>
         <DependentUpon>appsettings.json</DependentUpon>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+        <IsTransformFile>true</IsTransformFile>
+      </None>
       <Content Update="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <TransformOnBuild>true</TransformOnBuild>
       </Content>
     </ItemGroup>
 
