@@ -17,10 +17,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //[OpenTelemetry-基本設定]
-// builder.Services.AddOpenTelemetrySettings(builder);
 builder.Services.AddTracing(builder)
-    .AddMetrics(builder);
-    // .AddLogging(builder);
+    .AddMetrics(builder)
+    .AddLogging(builder);
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<UserRepository>();
@@ -34,6 +33,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 var app = builder.Build();
 
 app.MapPrometheusScrapingEndpoint();
+app.UseSerilogRequestLogging();
 
 app.UseSwagger();
 app.UseSwaggerUI();

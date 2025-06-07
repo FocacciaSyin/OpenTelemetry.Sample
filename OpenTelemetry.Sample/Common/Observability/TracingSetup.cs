@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using System.Reflection;
-using Common.Settings;
+﻿using Common.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,10 +40,10 @@ public static class TracingSetup
             tracing.AddHttpClientInstrumentation(options => { });
             tracing.AddEntityFrameworkCoreInstrumentation(options => { options.SetDbStatementForText = true; });
 
-            if (string.IsNullOrEmpty(apiSettings.OTLP_ENDPOINT_URL) == false)
+            if (string.IsNullOrEmpty(apiSettings.OTLP_Tracing_URL) == false)
             {
                 //匯出 Tracing 資料到 Tempo
-                tracing.AddOtlpExporter(otlpOptions => { otlpOptions.Endpoint = new Uri(apiSettings.OTLP_ENDPOINT_URL); });
+                tracing.AddOtlpExporter(otlpOptions => { otlpOptions.Endpoint = new Uri(apiSettings.OTLP_Tracing_URL); });
             }
             else
             {

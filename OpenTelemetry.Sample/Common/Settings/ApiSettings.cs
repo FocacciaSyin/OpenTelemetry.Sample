@@ -8,9 +8,9 @@ public class ApiSettings
     public string BaseUrl { get; set; }
 
     /// <summary>
-    /// Opentelemetry Endpoint URL
+    /// Opentelemetry Tracing URL
     /// </summary>
-    public string OTLP_ENDPOINT_URL { get; set; }
+    public string OTLP_Tracing_URL { get; set; }
 
     /// <summary>
     /// Tracing Service Name
