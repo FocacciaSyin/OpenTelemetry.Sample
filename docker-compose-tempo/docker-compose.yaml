@@ -3,7 +3,7 @@ networks:
 
 services:
   tempo:
-    image: grafana/tempo:latest
+    image: grafana/tempo:2.7.2
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
       - ./tempo.yaml:/etc/tempo.yaml
@@ -18,7 +18,7 @@ services:
 
   loki:
     container_name: loki
-    image: grafana/loki:latest
+    image: grafana/loki:3.5.0
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
@@ -32,7 +32,7 @@ services:
       - monitoring
   
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.53.4
     command:
       - --config.file=/etc/prometheus.yaml
       - --web.enable-remote-write-receiver
@@ -46,7 +46,7 @@ services:
       - monitoring
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:12.0.0
     volumes:
       - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
       # Dashboard 還是手動匯入
@@ -82,23 +82,23 @@ services:
   #     - "55679:55679" # zpages extension
   #   depends_on:
   #     - tempo
-
-  webapp1:
-    image: webapplication1-release:latest
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Release
-    ports:
-      - "5132:8080"
-    networks:
-      - monitoring
-  webapp2:
-    image: webapplication2-release:latest
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Release
-    ports:
-      - "5133:8080"
-    networks:
-      - monitoring
+#
+#  webapp1:
+#    image: webapplication1-release:latest
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=Release
+#    ports:
+#      - "5132:8080"
+#    networks:
+#      - monitoring
+#  webapp2:
+#    image: webapplication2-release:latest
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=Release
+#    ports:
+#      - "5133:8080"
+#    networks:
+#      - monitoring
         
         
 volumes:
